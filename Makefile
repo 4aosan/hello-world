@@ -1,4 +1,4 @@
-#hello world
+# hello world
 TARGET  = hello
 CC      = gcc
 CFLAGS  = -g -MMD -MP
@@ -13,19 +13,19 @@ OBJS    = $(subst $(SRC_DIR),$(OBJ_DIR),$(SOURCES:.c=.o))
 OBJ     = $(OBJ_DIR)/%.o
 DEPENDS = $(OBJS:.o=.d)
 
-$(warning SOURCES=$(SOURCES))
-$(warning OBJS=$(OBJS))
-
 all: $(TARGET)
 
 $(TARGET): $(OBJS) $(LIBS)
 	$(CC) -o $@ $(OBJS) $(LDFLAGS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@if [ ! -d $(OBJ_DIR) ]; \
+		then mkdir -p $(OBJ_DIR); \
+	fi
 	$(CC) $(CFLAGS) $(INCLUDE) -o $@ -c $<
 
 clean:
-	$(RM) $(OBJS) $(TARGET)
+	$(RM) $(OBJS) $(TARGET) $(DEPENDS)
 
 -include $(DEPENDS)
 
