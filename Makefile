@@ -2,7 +2,7 @@
 TARGET  = hello
 CC      = gcc
 CFLAGS  = -g -MMD -MP
-LDFLAGS = 
+LDFLAGS = -lpthread
 LIBS    = 
 INCLUDE = -I ./include
 SRC_DIR = ./src
